@@ -19,4 +19,4 @@ RUN dotnet publish -c Release -o /publish
 FROM base AS final
 WORKDIR /CantileverExampleApp
 COPY --from=publish /publish .
-ENTRYPOINT ["dotnet", "CantileverExampleDocker.Docker.dll"]
+# ENTRYPOINT ["dotnet", "CantileverExampleDocker.Docker.dll"]
