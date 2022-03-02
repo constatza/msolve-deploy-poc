@@ -32,10 +32,8 @@ run_non_mpi_test_cpu:
   stage: test
   image: art.cscs.ch/contbuild/testing/anfink/${PERSIST_IMAGE_NAME_CPU}
   script:
-    - echo "Hello from korali test in Sarus container on node ${SLURMD_NODENAME} (node ID ${SLURM_NODEID}, proc ID ${SLURM_PROCID}, replacing MPI ${USE_MPI})"
-    - pwd
-    - ls -lh
-    # For some reason we have to specify an absolute path. Sarus does not respect currently WORKDIR
+    # Paths should always be referenced as absolute paths here, because the working directory will NOT be WORKDIR from the Dockerfile
+    # The working directory will rather be the git root repository
     - /CantileverExampleApp/CantileverExampleDocker.Docker
   variables:
     USE_MPI: 'NO'
