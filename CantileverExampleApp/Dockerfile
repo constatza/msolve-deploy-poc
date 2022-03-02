@@ -6,9 +6,10 @@ WORKDIR /CantileverExampleApp
 # Build .NET app
 FROM mcr.microsoft.com/dotnet/core/sdk AS build
 WORKDIR /CantileverExampleApp
-COPY CantileverExampleDocker.Docker.csproj .
+# paths are always relative to the root of the repository
+COPY CantileverExampleApp/CantileverExampleDocker.Docker.csproj .
 RUN dotnet restore
-COPY . .
+COPY CantileverExampleApp .
 RUN dotnet build -c Release
 
 # Publish .NET app
