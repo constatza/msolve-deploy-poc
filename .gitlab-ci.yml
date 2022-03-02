@@ -35,8 +35,8 @@ run_non_mpi_test_cpu:
     - echo "Hello from korali test in Sarus container on node ${SLURMD_NODENAME} (node ID ${SLURM_NODEID}, proc ID ${SLURM_PROCID}, replacing MPI ${USE_MPI})"
     - pwd
     - ls -lh
+    # For some reason we have to specify an absolute path. Sarus does not respect currently WORKDIR
     - /CantileverExampleApp/CantileverExampleDocker.Docker
-    - ./CantileverExampleDocker.Docker
   variables:
     USE_MPI: 'NO'
     SLURM_CONSTRAINT: 'mc'
