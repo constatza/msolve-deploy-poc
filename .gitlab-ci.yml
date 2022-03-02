@@ -13,8 +13,7 @@ variables:
   VERBOSE: 'YES' # debugging
   SARUS_VERBOSE: 'YES' # debugging
 
-  
-# build stage  
+# build stage
 build_cpu:
   tags:
     - docker_jfrog
@@ -25,30 +24,21 @@ build_cpu:
   variables:
     PERSIST_IMAGE_NAME: ${PERSIST_IMAGE_NAME_CPU}
     DOCKERFILE:  CantileverExampleApp/Dockerfile
-    
 
-# test stage  
-.test_korali:
+
+# individual tests
+run_non_mpi_test_cpu:
   extends: .daint
   stage: test
-  variables:
-    PULL_IMAGE: 'YES'
-    CSCS_REGISTRY_LOGIN: 'YES'
-    # SLURM_TIMELIMIT: '15:00'
-
-.test_korali_non_mpi_cpu:
-  extends: .test_korali
+  image: art.cscs.ch/contbuild/testing/anfink/${PERSIST_IMAGE_NAME_CPU}
+  script:
+    - echo "Hello from korali test in Sarus container on node ${SLURMD_NODENAME} (node ID ${SLURM_NODEID}, proc ID ${SLURM_PROCID}, replacing MPI ${USE_MPI})"
+    - ./CantileverExampleDocker.Docker
   variables:
     USE_MPI: 'NO'
     SLURM_CONSTRAINT: 'mc'
     SLURM_JOB_NUM_NODES: 1
     SLURM_NTASKS: 1
-
-
-# individual tests 
-run_non_mpi_test_cpu:
-  extends: .test_korali_non_mpi_cpu
-  image: art.cscs.ch/contbuild/testing/anfink/${PERSIST_IMAGE_NAME_CPU}
-  script:
-    - echo "Hello from korali test in Sarus container on node ${SLURMD_NODENAME} (node ID ${SLURM_NODEID}, proc ID ${SLURM_PROCID}, replacing MPI ${USE_MPI})"
-    - ./CantileverExampleDocker.Docker
+    PULL_IMAGE: 'YES'
+    CSCS_REGISTRY_LOGIN: 'YES'
+    # SLURM_TIMELIMIT: '15:00'
