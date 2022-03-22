@@ -34,7 +34,7 @@ run_non_mpi_test_cpu:
   script:
     # Paths should always be referenced as absolute paths here, because the working directory will NOT be WORKDIR from the Dockerfile
     # The working directory will rather be the git root repository
-    - /mpidocker/runTest.sh
+    - /runTest.sh
   variables:
     USE_MPI: 'NO'
     SLURM_CONSTRAINT: 'mc'
