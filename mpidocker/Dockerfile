@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 WORKDIR /mpidocker
-COPY . .
+COPY ./mpidocker .
 
 RUN apt-get update
 RUN apt-get install -y ssh mpich wget
