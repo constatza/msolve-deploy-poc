@@ -9,7 +9,7 @@ stages:
 
 # variables that apply to all jobs
 variables:
-  PERSIST_IMAGE_NAME_CPU: msolve_cantilever_image
+  PERSIST_IMAGE_NAME_CPU: msolve_mpi_image
   VERBOSE: 'YES' # debugging
   SARUS_VERBOSE: 'YES' # debugging
 
@@ -23,7 +23,7 @@ build_cpu:
     - "true"
   variables:
     PERSIST_IMAGE_NAME: ${PERSIST_IMAGE_NAME_CPU}
-    DOCKERFILE:  CantileverExampleApp/Dockerfile
+    DOCKERFILE:  mpidocker/Dockerfile
 
 
 # individual tests
@@ -34,7 +34,7 @@ run_non_mpi_test_cpu:
   script:
     # Paths should always be referenced as absolute paths here, because the working directory will NOT be WORKDIR from the Dockerfile
     # The working directory will rather be the git root repository
-    - /CantileverExampleApp/CantileverExampleDocker.Docker
+    - /mpidocker/runTest.sh
   variables:
     USE_MPI: 'NO'
     SLURM_CONSTRAINT: 'mc'
