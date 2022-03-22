@@ -34,12 +34,14 @@ run_non_mpi_test_cpu:
   script:
     # Paths should always be referenced as absolute paths here, because the working directory will NOT be WORKDIR from the Dockerfile
     # The working directory will rather be the git root repository
-    - /runTest.sh
+    # There is no need to call mpiexec or srun in any form. The number of nodes/processes is specified via the variables below
+    # The correct srun command is built by the CI system. All we need to do is to specify the commands that need to be executed
+    - /mpidocker/runTest.sh
   variables:
     USE_MPI: 'NO'
     SLURM_CONSTRAINT: 'mc'
     SLURM_JOB_NUM_NODES: 1
-    SLURM_NTASKS: 1
+    SLURM_NTASKS: 2
     PULL_IMAGE: 'YES'
     CSCS_REGISTRY_LOGIN: 'YES'
     # SLURM_TIMELIMIT: '15:00'
