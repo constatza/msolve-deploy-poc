@@ -40,7 +40,7 @@ run_non_mpi_test_cpu:
   variables:
     USE_MPI: 'YES'
     SLURM_CONSTRAINT: 'mc'
-    SLURM_JOB_NUM_NODES: 1
+    SLURM_JOB_NUM_NODES: 2
     SLURM_NTASKS: 4
     PULL_IMAGE: 'YES'
     CSCS_REGISTRY_LOGIN: 'YES'
