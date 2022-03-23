@@ -3,7 +3,22 @@ WORKDIR /mpidocker
 COPY ./mpidocker .
 
 RUN apt-get update
-RUN apt-get install -y ssh mpich wget
+RUN apt-get install -y ssh wget build-essential
+# RUN apt-get install -y ssh mpich wget
+
+# MPICH
+# RUN wget -q https://www.mpich.org/static/downloads/3.3a2/mpich-3.3a2.tar.gz \
+RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz \
+    && tar xf mpich-3.1.4.tar.gz \
+    && cd mpich-3.1.4 \
+    && ./configure --disable-fortran --enable-fast=all,O3 --prefix=/usr \
+    && make -j$(nproc) \
+    && make install \
+    && ldconfig \
+    && cd .. \
+    && rm -rf mpich-3.1.4 \
+    && rm mpich-3.1.4.tar.gz
+
 
 # DOTNET SDK
 RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
