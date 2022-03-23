@@ -19,7 +19,8 @@ namespace DotNetClient
             {
                 Console.WriteLine("Hello, from process number "
                                         + communicator.Rank + " of "
-                                        + communicator.Size);
+                                        + communicator.Size
+                                        + " on processor: " + MPI.Environment.ProcessorName);
             });
         }
 
