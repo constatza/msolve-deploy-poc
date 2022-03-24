@@ -108,7 +108,7 @@ namespace MGroup.Solvers.DDM.Tests.ExampleModels
 			var results = new Table<int, int, double>();
 			#region long list of solution values per dof
 			results[0, dofX] = 0; results[0, dofY] = 0; results[0, dofZ] = 0;
-			results[1, dofX] = 40/*50.922197735894756*/; results[1, dofY] = 17.9755448390772; results[1, dofZ] = -214.64651928346373;
+			results[1, dofX] = 50.922197735894756; results[1, dofY] = 17.9755448390772; results[1, dofZ] = -214.64651928346373;
 			results[2, dofX] = 67.66259154588649; results[2, dofY] = 66.98508867950706; results[2, dofZ] = -24.789749258130566;
 			results[3, dofX] = 47.87485771328109; results[3, dofY] = 116.28996057949249; results[3, dofZ] = 174.1355419208071;
 			results[4, dofX] = 0; results[4, dofY] = 0; results[4, dofZ] = 0;
