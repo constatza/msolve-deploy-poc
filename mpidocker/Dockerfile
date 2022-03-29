@@ -16,7 +16,10 @@ RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz \
     && cd .. \
     && rm -rf mpich-3.1.4 \
     && rm mpich-3.1.4.tar.gz
-
+# CUDA
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+RUN apt-get update
+RUN apt-get install cuda-10-0
 
 # DOTNET SDK
 RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
