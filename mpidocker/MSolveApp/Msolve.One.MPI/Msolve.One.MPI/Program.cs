@@ -10,6 +10,7 @@ namespace DotNetClient
             // Hello(args);
             // HostNamesTest(args);
             // CommunicationTest(args);
+            ILGPUTest.runILGPUTest(args);
             MpiTestSuite.RunTestsWith5Processes();
 		}
 
