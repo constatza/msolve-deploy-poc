@@ -7,11 +7,11 @@ namespace DotNetClient
     {
         static void Main(string[] args)
         {
-            // Hello(args);
+            ILGPUTest.runILGPUTest(args);
+            Hello(args);
             // HostNamesTest(args);
             // CommunicationTest(args);
-            ILGPUTest.runILGPUTest(args);
-            MpiTestSuite.RunTestsWith5Processes();
+            // MpiTestSuite.RunTestsWith5Processes();
 		}
 
         static void Hello(string[] args)
