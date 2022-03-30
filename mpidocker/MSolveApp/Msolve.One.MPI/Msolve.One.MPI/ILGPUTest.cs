@@ -40,7 +40,7 @@ namespace DotNetClient
             }
 
             // Check for Cuda support
-            foreach (var device in context.GetCudaDevices())
+            foreach (var device in cudaDevices)
             {
                 using var accelerator = device.CreateCudaAccelerator(context);
                 Console.WriteLine($"Performing operations on {accelerator}");
