@@ -41,8 +41,8 @@ run_non_mpi_test_cpu:
     USE_MPI: 'YES'
     SLURM_PARTITION: 'normal'
     SLURM_CONSTRAINT: 'gpu'
-    SLURM_JOB_NUM_NODES: 2
-    SLURM_NTASKS: 4
+    SLURM_JOB_NUM_NODES: 1
+    SLURM_NTASKS: 1
     PULL_IMAGE: 'YES'
     CSCS_REGISTRY_LOGIN: 'YES'
     # SLURM_TIMELIMIT: '15:00'
