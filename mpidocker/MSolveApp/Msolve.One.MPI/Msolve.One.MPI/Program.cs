@@ -1,9 +1,10 @@
 ﻿using System;
 using MGroup.Solvers.DDM.Tests;
+using Xunit;
 
 namespace DotNetClient
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
