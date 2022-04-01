@@ -28,12 +28,12 @@ RUN add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/r
 RUN apt-get update
 RUN apt-get -y install cuda
 
-# MONO
-RUN apt install gnupg ca-certificates
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF         
-RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" |  tee /etc/apt/sources.list.d/mono-official-stable.list 
-RUN apt update
-RUN apt install -y mono-devel
+# # MONO
+# RUN apt install gnupg ca-certificates
+# RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF         
+# RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" |  tee /etc/apt/sources.list.d/mono-official-stable.list 
+# RUN apt update
+# RUN apt install -y mono-devel
 
 # DOTNET SDK
 RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
