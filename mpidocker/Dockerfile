@@ -46,7 +46,7 @@ RUN apt-get install -y dotnet-sdk-6.0
 
 # MSolve App
 WORKDIR /mpidocker/MSolveApp/Msolve.One.MPI
-RUN dotnet build -c Release
+RUN dotnet build
 
 WORKDIR /mpidocker
 RUN chmod +x runTest.sh
