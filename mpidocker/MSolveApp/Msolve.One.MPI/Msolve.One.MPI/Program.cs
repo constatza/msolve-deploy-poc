@@ -1,18 +1,20 @@
 ﻿using System;
 using MGroup.Solvers.DDM.Tests;
-// using Xunit;
+using Xunit;
 
 namespace DotNetClient
 {
     public class Program
     {
-        static void Main(string[] args)
+        [Fact]
+        static void MPITest()
         {
-            ILGPUTest.runILGPUTest(args);
+            // ILGPUTest.runILGPUTest(args);
             // Hello(args);
             // HostNamesTest(args);
             // CommunicationTest(args);
             MpiTestSuite.RunTestsWith5Processes();
+            Assert.True(true);
 		}
 
         static void Hello(string[] args)
