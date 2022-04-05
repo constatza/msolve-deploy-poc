@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y ssh wget build-essential
 RUN apt-get install -y software-properties-common
 
-MPICH
+# MPICH
 RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz \
     && tar xf mpich-3.1.4.tar.gz \
     && cd mpich-3.1.4 \
