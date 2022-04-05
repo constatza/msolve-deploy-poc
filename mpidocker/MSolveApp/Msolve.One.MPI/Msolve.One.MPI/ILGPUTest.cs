@@ -80,7 +80,7 @@ namespace DotNetClient
             }
         }
 
-        public static void runILGPUTest(string[] args)
+        public static void runILGPUTest()
         {
             try
             {

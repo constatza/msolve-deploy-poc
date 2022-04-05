@@ -9,7 +9,7 @@ namespace DotNetClient
         [Fact]
         static void MPITest()
         {
-            // ILGPUTest.runILGPUTest(args);
+            ILGPUTest.runILGPUTest();
             // Hello(args);
             // HostNamesTest(args);
             // CommunicationTest(args);
