@@ -7,7 +7,7 @@ COPY ./mpidocker .
 RUN apt-get update 
 RUN apt-get install -y apt-utils
 RUN apt-get install -y ssh wget build-essential
-RUN apt-get install -y software-properties-common
+# RUN apt-get install -y software-properties-common
 
 # MPICH
 RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz \
