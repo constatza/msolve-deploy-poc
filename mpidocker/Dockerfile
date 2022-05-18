@@ -38,4 +38,4 @@ RUN cd /tmp \
 # MSolve App
 RUN cd /mpidocker/MSolveApp/Msolve.One.MPI \
  && dotnet build \
- && chmod ../../runTest.sh
+ && chmod +x ../../runTest.sh
