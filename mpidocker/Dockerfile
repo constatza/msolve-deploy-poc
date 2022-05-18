@@ -1,5 +1,6 @@
 FROM docker.io/nvidia/cuda:11.2.0-cudnn8-devel-ubuntu20.04
 
+ENV DEBIAN_FRONTEND noninteractive
 ARG MPICH_VERSION=3.1.4
 
 RUN env TZ=Europe/Zurich DEBIAN_FRONTEND=noninteractive apt-get update \
