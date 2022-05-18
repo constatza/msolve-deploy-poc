@@ -36,6 +36,6 @@ RUN cd /tmp \
   && apt-get install -y dotnet-sdk-6.0
 
 # MSolve App
-RUN cd /src/MSolveApp/Msolve.One.MPI \
+RUN cd /mpidocker/MSolveApp/Msolve.One.MPI \
  && dotnet build \
  && chmod ../../runTest.sh
