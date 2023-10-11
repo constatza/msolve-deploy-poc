@@ -1,41 +1,43 @@
-FROM docker.io/nvidia/cuda:11.2.0-cudnn8-devel-ubuntu20.04
+FROM docker.io/nvidia/cuda:12.2.0-devel-ubuntu22.04
 
-ENV DEBIAN_FRONTEND noninteractive
+# TODO: decide which variable is actually ENV or just ARG
+ENV DEBIAN_FRONTEND=noninteractive \
+    TZ='Europe/Zurich'
+
 ARG MPICH_VERSION=3.1.4
 
-RUN env TZ=Europe/Zurich DEBIAN_FRONTEND=noninteractive apt-get update \
-    && env TZ=Europe/Zurich DEBIAN_FRONTEND=noninteractive apt-get -y --fix-missing upgrade
-
+# !!! Important !!!
+# For Ubuntu 22.04> you can install .NET SDK either from: 
+# the Ubuntu repo OR the Microsoft repo. 
+# Don't mix!
+# Here we install from Ubuntu 
+RUN apt-get update  && \
+    apt-get -y --fix-missing upgrade && \
+    apt-get -y install apt-utils wget build-essential dotnet-sdk-6.0 ssh
 
 WORKDIR /mpidocker
-COPY ./mpidocker .
+COPY . .
 
-RUN apt-get update 
-RUN apt-get install -y apt-utils
-RUN apt-get install -y ssh wget build-essential
 
-# MPICH
-RUN cd /tmp \
-  && wget -q http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz \
-  && tar -xf mpich-${MPICH_VERSION}.tar.gz \
-  && cd mpich-${MPICH_VERSION} \
-  && ./configure --disable-fortran --enable-fast=all,O3 --prefix=/usr \
-  && echo "Using $(cat /proc/cpuinfo | grep 'model name' | wc -l) processes to build" \
-  && make -j$(cat /proc/cpuinfo | grep 'model name' | wc -l) \
-  && make install \
-  && ldconfig \
-  && cd .. \
-  && rm -Rf mpich-${MPICH_VERSION}{,.tar.gz}
 
-# DOTNET SDK
-RUN cd /tmp \
-  && wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
-  && dpkg -i packages-microsoft-prod.deb \
-  && rm packages-microsoft-prod.deb \
-  && apt-get update \
-  && apt-get install -y dotnet-sdk-6.0
+# === MPICH ===
+WORKDIR /tmp
+RUN wget -q "http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz" && \
+    tar -xf "mpich-${MPICH_VERSION}.tar.gz"  && \ 
+    cd "mpich-${MPICH_VERSION}" && \
+    ./configure --disable-fortran --enable-fast=all,O3 --prefix=/usr && \
+    NUM_PROCESSES=$(cat /proc/cpuinfo | grep 'model name' | wc -l) && \
+    echo "Using ${NUM_PROCESSES} processes to build" && \
+    make -j"${NUM_PROCESSES}"  && \
+    make install && \
+    ldconfig && \
+    cd .. && \
+    rm -rf ../"mpich-${MPICH_VERSION}"{,.tar.gz} 
 
-# MSolve App
-RUN cd /mpidocker/MSolveApp/Msolve.One.MPI \
- && dotnet build \
- && chmod +x ../../runTest.sh
+
+# === MSolve App ===
+RUN apt-get -y remove wget && \
+    apt-get -y autoremove && \
+    cd /mpidocker/MSolveApp/Msolve.One.MPI && \
+    dotnet build && \
+    chmod +x ../../runTest.sh
