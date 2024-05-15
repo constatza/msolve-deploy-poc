@@ -35,7 +35,6 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 # PREPARE DIRS
 cd $HOME/msolve-deploy-poc/MSolveApp/
-mkdir -p ./output
 
 srun dotnet test ./Msolve.One.MPI/
 
